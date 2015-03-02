@@ -1,6 +1,6 @@
 {
   "name": "grunt-escomplex",
-  "version": "0.0.3",
+  "version": "0.0.4-pre",
   "description": "Code complexity module for Grunt using escomplex.",
   "author": {
     "name": "Ludovic LEFEVRE",
