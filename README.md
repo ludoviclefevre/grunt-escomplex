@@ -28,28 +28,39 @@ In your project's Gruntfile, add a section named `escomplex` to the data object 
 grunt.initConfig({
   escomplex: {
     options: {
-      // Task-specific options go here.
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    src: [
+      'specificFile.js',
+      'src/**/*.js'
+    ]
   },
 })
 ```
 
-### Options
+### options
 
-#### options.separator
-Type: `String`
-Default value: `',  '`
+`options`, is an optional object containing properties that modify some of the complexity calculations:
 
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+#### `options.logicalor`:
+  Boolean indicating whether operator `||`
+  should be considered a source of cyclomatic complexity,
+  defaults to `true`.
+#### `options.switchcase`:
+  Boolean indicating whether `switch` statements
+  should be considered a source of cyclomatic complexity,
+  defaults to `true`.
+#### `options.forin`:
+  Boolean indicating whether `for`...`in` loops
+  should be considered a source of cyclomatic complexity,
+  defaults to `false`.
+#### `options.trycatch`:
+  Boolean indicating whether `catch` clauses
+  should be considered a source of cyclomatic complexity,
+  defaults to `false`.
+#### `options.newmi`:
+  Boolean indicating whether the maintainability
+  index should be rebased on a scale from 0 to 100,
+  defaults to `false`.
 
 ### Usage Examples
 
@@ -59,27 +70,17 @@ In this example, the default options are used to do something with whatever. So 
 ```js
 grunt.initConfig({
   escomplex: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  escomplex: {
     options: {
-      separator: ': ',
-      punctuation: ' !!!',
+      logicalor: true,
+      switchcase: true,
+      forin: false,
+      trycatch: false,
+      newmi: true
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    src: [
+      'specificFile.js',
+      'src/**/*.js'
+    ]
   },
 })
 ```
