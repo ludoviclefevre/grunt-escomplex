@@ -76,7 +76,8 @@ grunt.initConfig({
 
 `options.format` is an optional object containing properties that modify some of the output format:
 
-#### `options.format.showFunctionDetails`: Boolean indicating whether complexity details should be displayed in output result
+#### `options.format.showFunctionDetails`:
+  Boolean indicating whether complexity details should be displayed in output result
 
 ### Usage Examples
 
