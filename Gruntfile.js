@@ -17,7 +17,7 @@ module.exports = function (grunt) {
         jshint: {
             all: [
                 'Gruntfile.js',
-                'tasks/*.js',
+                'tasks/**/*.js',
                 '<%= nodeunit.tests %>'
             ],
             options: {
@@ -40,9 +40,11 @@ module.exports = function (grunt) {
         // Configuration to be run (and then tested).
         escomplex: {
             default_options: {
-                options: {},
+                options: {
+                    newmi: true
+                },
                 src: [
-                    'tasks/*.js'
+                    'tasks/**/*.js'
                 ]
             }
         },
