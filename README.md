@@ -28,6 +28,11 @@ In your project's Gruntfile, add a section named `escomplex` to the data object 
 grunt.initConfig({
   escomplex: {
     options: {
+      logicalor: true,
+      switchcase: true,
+      forin: false,
+      trycatch: false,
+      newmi: true
     },
     src: [
       'specificFile.js',
@@ -39,7 +44,7 @@ grunt.initConfig({
 
 ### options
 
-`options`, is an optional object containing properties that modify some of the complexity calculations:
+`options` is an optional object containing properties that modify some of the complexity calculations:
 
 #### `options.logicalor`:
   Boolean indicating whether operator `||`
