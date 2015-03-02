@@ -1,15 +1,28 @@
 {
   "name": "grunt-escomplex",
   "version": "0.0.1",
-  "description": "Code complexity module Grunt using escomplex.",
-  "repository": "",
+  "description": "Code complexity module for Grunt using escomplex.",
   "author": {
     "name": "Ludovic LEFEVRE",
     "email": "contact@ludoviclefevre.fr",
     "url": "http://www.ludoviclefevre.fr"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "escomplex",
+    "complexity"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ludoviclefevre/grunt-escomplex.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ludoviclefevre/grunt-escomplex/issues"
+  },
+  "files": [
+    "Gruntfile.js",
+    "tasks",
+    "README.md"
   ],
   "main": "Gruntfile.js",
   "engines": {
@@ -18,8 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "escomplex-js": "~1.1.0",
-    "async": "0.9.0",
-    "lodash": "~3.3.1"
+    "async": "0.9.0"
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.5.0",
