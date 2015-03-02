@@ -2,48 +2,33 @@
 
 var complexity = require('escomplex-js'),
     async = require('async'),
+    fs = require('fs'),
     output = require('./formats/console'),
+    getAnalyseSources = function (path, callback) {
+        fs.readFile(path, function(err, data) {
+            var item = {
+                path: path,
+                code: data
+            };
+            callback(null, item);
+        });
+    },
     escomplex = function (grunt) {
-
         var task = function () {
-
             var done = this.async(),
-                complexityOptions = this.options(),
+                options = this.options(),
+                complexityOptions = options.complexity,
+                formatOptions = options.format;
 
-                analyseFile = function (filepath, callback) {
-                    var result = complexity.analyse(filepath, complexityOptions),
-                        outputMessage = [
-                            "\r\n",
-                            filepath,
-                            ": ",
-                            "\r\n",
-                            output.format(result),
-                            "\r\n"
-                        ];
-
-                    grunt.log.writeln(outputMessage.join(''));
-                    callback();
-                },
-
-                getFilteredFiles = function (filepath) {
-                    // Warn on and remove invalid source files (if nonull was set).
-                    if (!grunt.file.exists(filepath)) {
-                        grunt.log.warn('Source file "' + filepath + '" not found.');
-                        return false;
-                    } else {
-                        return true;
-                    }
-                },
-
-                filter = function (file, callback) {
-                    var sources = file.src.filter(getFilteredFiles);
-                    async.each(sources, analyseFile, callback);
-                };
-
-            async.each(this.files, filter, done);
+            async.map(this.filesSrc, getAnalyseSources, function(err, files) {
+                var result = complexity.analyse(files, complexityOptions),
+                    outputMessage = output.format(result, formatOptions);
+                grunt.log.writeln(outputMessage);
+                done();
+            });
         };
 
-        grunt.registerMultiTask('escomplex', 'Code complexity module Grunt using escomplex.', task);
+        grunt.registerMultiTask('escomplex', 'Code complexity module for Grunt using escomplex.', task);
 
     };
 
