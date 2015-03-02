@@ -28,11 +28,16 @@ In your project's Gruntfile, add a section named `escomplex` to the data object 
 grunt.initConfig({
   escomplex: {
     options: {
-      logicalor: true,
-      switchcase: true,
-      forin: false,
-      trycatch: false,
-      newmi: true
+      complexity: {
+        logicalor: true,
+        switchcase: true,
+        forin: false,
+        trycatch: false,
+        newmi: true
+      },
+      format: {
+        showFunctionDetails: false
+      }
     },
     src: [
       'specificFile.js',
@@ -42,30 +47,36 @@ grunt.initConfig({
 })
 ```
 
-### options
+### options.complexity
 
-`options` is an optional object containing properties that modify some of the complexity calculations:
+`options.complexity` is an optional object containing properties that modify some of the complexity calculations:
 
-#### `options.logicalor`:
+#### `options.complexity.logicalor`:
   Boolean indicating whether operator `||`
   should be considered a source of cyclomatic complexity,
   defaults to `true`.
-#### `options.switchcase`:
+#### `options.complexity.switchcase`:
   Boolean indicating whether `switch` statements
   should be considered a source of cyclomatic complexity,
   defaults to `true`.
-#### `options.forin`:
+#### `options.complexity.forin`:
   Boolean indicating whether `for`...`in` loops
   should be considered a source of cyclomatic complexity,
   defaults to `false`.
-#### `options.trycatch`:
+#### `options.complexity.trycatch`:
   Boolean indicating whether `catch` clauses
   should be considered a source of cyclomatic complexity,
   defaults to `false`.
-#### `options.newmi`:
+#### `options.complexity.newmi`:
   Boolean indicating whether the maintainability
   index should be rebased on a scale from 0 to 100,
   defaults to `false`.
+
+### options.format
+
+`options.format` is an optional object containing properties that modify some of the output format:
+
+#### `options.format.showFunctionDetails`: Boolean indicating whether complexity details should be displayed in output result
 
 ### Usage Examples
 
@@ -76,11 +87,16 @@ In this example, the default options are used to do something with whatever. So 
 grunt.initConfig({
   escomplex: {
     options: {
-      logicalor: true,
-      switchcase: true,
-      forin: false,
-      trycatch: false,
-      newmi: true
+      complexity: {
+        logicalor: true,
+        switchcase: true,
+        forin: false,
+        trycatch: false,
+        newmi: true
+      },
+      format: {
+        showFunctionDetails: false
+      }
     },
     src: [
       'specificFile.js',

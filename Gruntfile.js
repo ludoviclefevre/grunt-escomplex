@@ -41,7 +41,12 @@ module.exports = function (grunt) {
         escomplex: {
             default_options: {
                 options: {
-                    newmi: true
+                    complexity: {
+                        newmi: true
+                    },
+                    format: {
+                        showFunctionDetails: false
+                    }
                 },
                 src: [
                     'tasks/**/*.js'
