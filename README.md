@@ -1,8 +1,6 @@
 # grunt-escomplex
 
-> Code complexity module Grunt using escomplex.
-
-Not usable yet...
+> Code complexity module Grunt using escomplex. Very early/rough stage, changing often.
 
 ## Getting Started
 This plugin requires Grunt.
