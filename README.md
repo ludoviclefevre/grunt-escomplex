@@ -42,7 +42,9 @@ grunt.initConfig({
       'src/**/*.js'
     ]
   },
-})
+});
+
+grunt.registerTask('complexity', 'escomplex');
 ```
 
 ### options.complexity
@@ -102,7 +104,9 @@ grunt.initConfig({
       'src/**/*.js'
     ]
   },
-})
+});
+
+grunt.registerTask('complexity', 'escomplex');
 ```
 
 ## Contributing
