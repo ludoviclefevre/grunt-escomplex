@@ -39,7 +39,7 @@ module.exports = function (grunt) {
 
         // Configuration to be run (and then tested).
         escomplex: {
-            default_options: {
+            default: {
                 options: {
                     complexity: {
                         newmi: true
@@ -50,6 +50,19 @@ module.exports = function (grunt) {
                 },
                 src: [
                     'tasks/**/*.js'
+                ]
+            },
+            maintainable: {
+                options: {
+                    complexity: {
+                        newmi: true
+                    },
+                    format: {
+                        showFunctionDetails: false
+                    }
+                },
+                src: [
+                    'test/fixtures/maintainable.js'
                 ]
             }
         },

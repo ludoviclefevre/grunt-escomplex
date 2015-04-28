@@ -1,7 +1,5 @@
 'use strict';
 
-var grunt = require('grunt');
-
 /*
  ======== A Handy Little Nodeunit Reference ========
  https://github.com/caolan/nodeunit
@@ -22,20 +20,26 @@ var grunt = require('grunt');
  test.ifError(value)
  */
 
+var grunt = require('grunt'),
+    path = require('path');
+
 exports.escomplex = {
     setUp: function (done) {
         // setup here if necessary
         done();
     },
-    default_options: function (test) {
-        test.expect(1);
-        test.ok(true);
+    maintainableCode: function (test) {
+        test.expect(3);
+        grunt.util.spawn({
+            cmd: 'grunt',
+            args: ['--gruntfile', path.join(__dirname, '/fixtures/maintainable-gruntfile.js')]
+        }, function (error, output, code) {
+            test.ifError(error);
+            test.equal(code, 0);
 
-        /*
-                var actual = grunt.file.read('tmp/default_options'),
-                    expected = grunt.file.read('test/expected/default_options');
-                test.equal(actual, expected, 'should describe what the default behavior is.');
-        */
-        test.done();
+            test.ok(output.stdout.indexOf('Maintainability index: 100'));
+
+            test.done();
+        });
     }
 };

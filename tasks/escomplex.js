@@ -5,12 +5,15 @@ var complexity = require('escomplex-js'),
     fs = require('fs'),
     output = require('./formats/console'),
     getAnalyseSources = function (path, callback) {
-        fs.readFile(path, function(err, data) {
+        fs.readFile(path, function (err, data) {
+            if (err) {
+                return callback(err);
+            }
             var item = {
                 path: path,
                 code: data
             };
-            callback(null, item);
+            return callback(null, item);
         });
     },
     escomplex = function (grunt) {
@@ -20,16 +23,18 @@ var complexity = require('escomplex-js'),
                 complexityOptions = options.complexity,
                 formatOptions = options.format;
 
-            async.map(this.filesSrc, getAnalyseSources, function(err, files) {
+            async.map(this.filesSrc, getAnalyseSources, function (err, files) {
+                if (err) {
+                    return done(err);
+                }
                 var result = complexity.analyse(files, complexityOptions),
                     outputMessage = output.format(result, formatOptions);
                 grunt.log.writeln(outputMessage);
-                done();
+                return done();
             });
         };
 
         grunt.registerMultiTask('escomplex', 'Code complexity module for Grunt using escomplex.', task);
-
     };
 
 module.exports = escomplex;
