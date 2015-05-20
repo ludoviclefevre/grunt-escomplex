@@ -1,0 +1,11 @@
+.idea/
+coverage/
+test/
+tmp/
+*.log
+.editorconfig
+.jscsrc
+.jshintrc
+.travis.yml
+Gruntfile.js
+appveyor.yml

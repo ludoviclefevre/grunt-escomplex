@@ -1,13 +1,5 @@
 'use strict';
 
-module.exports.format = format;
-
-function format(result, options) {
-    return result.reports.reduce(function (formatted, report) {
-        return formatted + formatModule(report, options) + '\n\n';
-    }, formatProject(result));
-}
-
 function formatProject(result) {
     return [
         'Project summary: \n',
@@ -20,32 +12,6 @@ function formatProject(result) {
         'Change cost: ', result.changeCost, '%\n',
         'Core size: ', result.coreSize, '%\n\n'
     ].join('');
-}
-
-function formatModule(report, options) {
-    var message = [
-        'File summary: \n',
-        report.path, '\n\n',
-        '  Physical LOC: ', report.aggregate.sloc.physical, '\n',
-        '  Logical LOC: ', report.aggregate.sloc.logical, '\n',
-        '  Mean parameter count: ', report.params, '\n',
-        '  Cyclomatic complexity: ', report.aggregate.cyclomatic, '\n',
-        '  Cyclomatic complexity density: ', report.aggregate.cyclomaticDensity, '%\n',
-        '  Maintainability index: ', report.maintainability, '\n',
-        '  Dependency count: ', report.dependencies.length
-    ];
-
-    if(options && options.showFunctionDetails) {
-        message.push(formatFunctions(report.functions));
-    }
-
-    return message.join('');
-}
-
-function formatFunctions(report) {
-    return report.reduce(function (formatted, r) {
-        return formatted + '\n\n' + formatFunction(r);
-    }, '');
 }
 
 function formatFunction(report) {
@@ -63,3 +29,36 @@ function formatFunction(report) {
     ].join('');
 }
 
+function formatFunctions(report) {
+    return report.reduce(function (formatted, r) {
+        return formatted + '\n\n' + formatFunction(r);
+    }, '');
+}
+
+function formatModule(report, options) {
+    var message = [
+        'File summary: \n',
+        report.path, '\n\n',
+        '  Physical LOC: ', report.aggregate.sloc.physical, '\n',
+        '  Logical LOC: ', report.aggregate.sloc.logical, '\n',
+        '  Mean parameter count: ', report.params, '\n',
+        '  Cyclomatic complexity: ', report.aggregate.cyclomatic, '\n',
+        '  Cyclomatic complexity density: ', report.aggregate.cyclomaticDensity, '%\n',
+        '  Maintainability index: ', report.maintainability, '\n',
+        '  Dependency count: ', report.dependencies.length
+    ];
+
+    if (options && options.showFunctionDetails) {
+        message.push(formatFunctions(report.functions));
+    }
+
+    return message.join('');
+}
+
+function format(result, options) {
+    return result.reports.reduce(function (formatted, report) {
+        return formatted + formatModule(report, options) + '\n\n';
+    }, formatProject(result));
+}
+
+module.exports.format = format;

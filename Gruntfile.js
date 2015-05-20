@@ -9,6 +9,8 @@
 'use strict';
 
 module.exports = function (grunt) {
+    // Show elapsed time at the end
+    require('time-grunt')(grunt);
     // load all npm grunt tasks
     require('load-grunt-tasks')(grunt);
 
@@ -18,7 +20,7 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 'tasks/**/*.js',
-                '<%= nodeunit.tests %>'
+                'test/*_test.js'
             ],
             options: {
                 jshintrc: '.jshintrc',
@@ -67,11 +69,33 @@ module.exports = function (grunt) {
             }
         },
 
-        // Unit tests.
-        nodeunit: {
-            tests: ['test/*_test.js']
+        mocha_istanbul: {
+            coverage: {
+                src: 'test'
+            },
+            coveralls: {
+                src: ['test'],
+                options: {
+                    coverage: true, // this will make the grunt.event.on('coverage') event listener to be triggered
+                    check: {
+                        lines: 75,
+                        statements: 75
+                    },
+                    root: '.', // define where the cover task should consider the root of libraries that are covered by tests
+                    reportFormats: ['cobertura', 'lcovonly']
+                }
+            }
         }
 
+    });
+
+    grunt.event.on('coverage', function (lcov, done) {
+        require('coveralls').handleInput(lcov, function (err) {
+            if (err) {
+                return done(err);
+            }
+            done();
+        });
     });
 
     // Actually load this plugin's task(s).
@@ -79,9 +103,11 @@ module.exports = function (grunt) {
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
-    grunt.registerTask('test', ['clean', 'escomplex', 'nodeunit']);
+    grunt.registerTask('test', ['jshint', 'jscs', 'clean', 'mocha_istanbul:coverage', 'escomplex']);
+
+    grunt.registerTask('travis', ['jshint', 'jscs', 'mocha_istanbul:coveralls']);
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint', 'jscs', 'test']);
+    grunt.registerTask('default', 'test');
 
 };
