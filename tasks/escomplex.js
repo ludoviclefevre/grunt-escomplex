@@ -21,7 +21,8 @@ var complexity = require('escomplex-js'),
             var done = this.async(),
                 options = this.options(),
                 complexityOptions = options.complexity,
-                formatOptions = options.format;
+                formatOptions = options.format,
+                breakOnErrors = options.breakOnErrors===true;
 
             async.map(this.filesSrc, getAnalyseSources, function (err, files) {
                 if (err) {
@@ -29,6 +30,9 @@ var complexity = require('escomplex-js'),
                 }
                 var result = complexity.analyse(files, complexityOptions),
                     outputMessage = output.format(result, formatOptions);
+
+                console.log(result);
+
                 grunt.log.writeln(outputMessage);
                 return done();
             });

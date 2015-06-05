@@ -4,6 +4,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         escomplex: {
             options: {
+                breakOnErrors: true,
                 complexity: {
                     logicalor: true,
                     switchcase: true,
