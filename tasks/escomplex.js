@@ -22,7 +22,7 @@ var complexity = require('escomplex-js'),
                 options = this.options(),
                 complexityOptions = options.complexity,
                 formatOptions = options.format,
-                breakOnErrors = options.breakOnErrors===true;
+                breakOnErrors = options.breakOnErrors === true;
 
             async.map(this.filesSrc, getAnalyseSources, function (err, files) {
                 if (err) {

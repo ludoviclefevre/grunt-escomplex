@@ -38,7 +38,7 @@ describe('grunt-escomplex', function () {
             }
         };
 
-        grunt.registerTask('testEnd', 'A test task', function() {
+        grunt.registerTask('testEnd', 'A test task', function () {
 
             done();
         });
