@@ -5,7 +5,7 @@ var grunt = require('grunt'),
     assert = require('chai').assert;
 
 describe('grunt-escomplex', function () {
-    it('should return a maintainability index of 100 for a maintainable script, in console mode.', function (done) {
+    it('should return a maintainability index of 100 for a maintainable script.', function (done) {
         grunt.util.spawn({
             cmd: 'grunt',
             args: ['--gruntfile', path.join(__dirname, '/fixtures/maintainable-gruntfile.js')]
@@ -16,45 +16,4 @@ describe('grunt-escomplex', function () {
             done();
         });
     });
-
-    /*
-    it('should return a maintainability index of 100 for a maintainable script, in lib mode.', function (done) {
-        var options = {
-            testStart: {},
-            testEnd: {},
-            escomplex: {
-                options: {
-                    complexity: {
-                        logicalor: true,
-                        switchcase: true,
-                        forin: false,
-                        trycatch: false,
-                        newmi: true
-                    },
-                    format: {
-                        showFunctionDetails: false
-                    }
-                },
-                src: [
-                    __dirname + 'fixtures/maintainable.js'
-                ]
-            }
-        };
-        grunt.initConfig(options);
-
-        grunt.registerTask('testStart', 'A test task', function () {
-            grunt.log.writeln('testStart');
-            return true;
-        });
-
-        grunt.registerTask('testEnd', 'A test task', function () {
-            grunt.log.writeln('coucou');
-            done();
-        });
-        //grunt.registerTask('toto', ['testEnd']);
-        grunt.log.writeln('tata');
-
-        grunt.task.run('testStart', 'testEnd');
-    });
-*/
 });
