@@ -31,7 +31,7 @@ var complexity = require('escomplex-js'),
                 var result = complexity.analyse(files, complexityOptions),
                     outputMessage = output.format(result, formatOptions);
 
-                console.log(result);
+                grunt.log.writeln(result);
 
                 grunt.log.writeln(outputMessage);
                 return done();

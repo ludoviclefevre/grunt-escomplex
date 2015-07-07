@@ -5,7 +5,6 @@ var grunt = require('grunt'),
     assert = require('chai').assert;
 
 describe('grunt-escomplex', function () {
-    /*
     it('should return a maintainability index of 100 for a maintainable script, in console mode.', function (done) {
         grunt.util.spawn({
             cmd: 'grunt',
@@ -16,8 +15,9 @@ describe('grunt-escomplex', function () {
             assert.include(output.stdout, 'Maintainability index: 100');
             done();
         });
-    });*/
+    });
 
+    /*
     it('should return a maintainability index of 100 for a maintainable script, in lib mode.', function (done) {
         var options = {
             testStart: {},
@@ -56,5 +56,5 @@ describe('grunt-escomplex', function () {
 
         grunt.task.run('testStart', 'testEnd');
     });
-
+*/
 });
